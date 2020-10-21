@@ -1,0 +1,126 @@
+body{
+    width: 100%;
+    height: 100%;
+    background: #f9f9f9;
+    color: #666;
+    font-size: 14px;
+    font-family: Helvetica,arial,"MI Lan Pro","Hiragino Sans GB","PingFang SC","Microsoft YaHei","微軟正黑體","儷黑 Pro",sans-serif;
+}
+.wrapper{
+    width: 100%;
+    min-height: 100%;
+    padding-top: 10%;
+    background: #f9f9f9;
+    .main{
+        padding-bottom: 80px;
+        width: 854px;
+        margin: 0 auto ;
+        .body{
+            width: 854px;
+            margin: 0 auto;
+            padding-bottom: 10px;
+            background-color: #ffffff;
+            color: #666;
+            .n-frame{
+                padding:0 34px 34px 0;
+                padding-bottom: 30px;
+                min-height: 400px;
+                .logo-area{
+                    padding-bottom: 40px;
+                    a{
+                        display: block;
+                        width: 49px;
+                        height: 48px;
+                        margin: 0 auto;
+                        cursor: default;
+                        background: url(../image/mi/register/milogo.png) no-repeat;
+                    }
+                }
+                .title{
+                    text-align: center;
+                    font-size: 30px;
+                    font-weight: normal;
+                    color: #333;
+                }
+                .reg-box{
+                    width: 332px;
+                    padding: 30px 0;
+                    line-height: 20px;
+                    margin: 0 auto;
+                    h4{
+                        padding-bottom: 5px;
+                        color: #333;
+                        font-weight: normal;
+                    }
+                    input{
+                        display: block;
+                        box-sizing: border-box;
+                        border: 1px solid #e8e8e8;
+                        width: 332px;
+                        height: 42px;
+                        margin-bottom: 15px;
+                    }
+                    #username,#password{
+                        padding-left: 14px;
+                    }
+                    .region-tip-text {
+                        margin-top: -10px;
+                        margin-bottom: 15px;
+                    }
+                    #conf-btn{
+                        background-color: #ff6700;
+                        margin-top: 30px;
+                        margin-bottom: 0px;
+                        border: 1px solid rgba(186,186,186,.3);
+                        color: #fff;
+                    }
+                    .success-notic{
+                        color: greenyellow;
+                    }
+                }
+                .privacy-box{
+                    text-align: center;
+                    padding-top: 40px;
+                    color: #9d9d9d;
+                    .selcect-privacy{
+                        padding: 10px 0;
+                        cursor: pointer;
+                        display: inline-block;
+                        a{
+                            color: #333;
+                            font-weight: bold;
+                        }
+                    }
+                }
+            }
+        }
+        .footer{
+            margin: 0 auto;
+            margin-top: 80px;
+            height: 80px;
+            text-align: center;
+            .lan-select-list>li{
+                display: inline-block;
+                a{
+                    color: #757575; 
+                    padding: 0 10px;
+                    display: inline-block;
+                    font-size: 14px;
+                    line-height: 14px;
+                    &:hover{
+                        color: #333;
+                    }
+                }
+                a.current{
+                    color: #333;
+                }
+            }
+            .f-copy{
+                padding: 10px;
+                a{
+                    color: #757575; 
+                }
+            }
+        }
+    }
+}
