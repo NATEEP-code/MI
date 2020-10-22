@@ -8,12 +8,14 @@
             dataType:'json',
             cache:false,
             success:function(res){
+                console.log(res.code);
                 if(res.code){
                     var arr = res.data;
                     if(res.data){
                         $('.empty-cart-wrap').addClass('not-empty');
                         $('.cart-wrap').addClass('not-empty');
                         $('.item-table').empty();
+                        console.log(arr);
                         $.each(arr,function(index,item){
                             $('.cart-wrap .item-table').append(
                                 `
@@ -47,15 +49,15 @@
                             )
                         });
                         var sCase=false;
+                        var sCaseAll=false;
                         function count(){
                             sCase=!sCase;
-                            $(this).toggleClass('icon-checkbox-selected');
-                            $('.no-select-tip').toggleClass('active')
-                            $('.btn-a')
-                            .toggleClass('btn-primary')
-                            .toggleClass('btn-disabled');
-                            
                             if(sCase){
+                                $(this).addClass('icon-checkbox-selected');
+                                $('.no-select-tip').addClass('active')
+                                $('.btn-a')
+                                .addClass('btn-primary')
+                                .removeClass('btn-disabled');
                                 $('.cart-total i').eq(1).text(
                                     $(this)
                                     .parent()
@@ -72,48 +74,55 @@
                                     .split('元')[0]
                                 )
                             }else{
+                                $(this).removeClass('icon-checkbox-selected');
+                                $('.no-select-tip').removeClass('active')
+                                $('.btn-a')
+                                .removeClass('btn-primary')
+                                .addClass('btn-disabled');
                                 $('.cart-total i').eq(1).text('0')
                                 $('.total-price em').text('0')
                             }
+                            console.log(2);
                         }
                         $('.list-head .icon-checkbox').click(function(){
-                            // $(this).toggleClass('icon-checkbox-selected');
-                            sCase = !sCase;
+                            sCaseAll = !sCaseAll;
                             var totalSum = '';
                             var totalNum = '';
-                            var totalPrice = '';
-                            if($('.item-row .icon-checkbox').hasClass('.icon-checkbox-selected')){
-                                $('.icon-checkbox').removeClass('icon-checkbox-selected');
-                            }
-                            $('.icon-checkbox').toggleClass('icon-checkbox-selected');
-                            $('.no-select-tip').toggleClass('active')
-                            $('.btn-a')
-                            .toggleClass('btn-primary')
-                            .toggleClass('btn-disabled');
+                            var totalPrice = null;
                             $('.change-goods-num input').each(function(i,v){
                                 totalSum+=$(v).val()
                                 return totalSum;
                             })
                             $('.item-row .col-total').each(function(i,v){
-                                totalPrice+=$(v).text().split('元')[0];
+                                totalPrice+=parseInt($(v).text().split('元')[0]);
                                 return totalPrice;
                             })
                             totalNum = $('.item-row').length;
-                            if(sCase){
+                            if(sCaseAll){
+                                sCase=true;
+                                $('.no-select-tip').addClass('active')
+                                $('.btn-a')
+                                .addClass('btn-primary')
+                                .removeClass('btn-disabled');
+                                $('.icon-checkbox').addClass('icon-checkbox-selected')
                                 $('.cart-total i').eq(0).text(totalNum);
                                 $('.cart-total i').eq(1).text(totalSum);
                                 $('.total-price em').text(totalPrice)
                             }else{
+                                sCase=false;
+                                $('.no-select-tip').removeClass('active')
+                                $('.btn-a')
+                                .removeClass('btn-primary')
+                                .addClass('btn-disabled');
+                                $('.icon-checkbox').removeClass('icon-checkbox-selected')
                                 $('.cart-total i').eq(0).text(totalNum);
                                 $('.cart-total i').eq(1).text('0')
                                 $('.total-price em').text('0')
                             }
                         })
-                        $('.icon-checkbox').each(function(i,v){
-                            if(i>0){
-                                $(v).click(count);
-                            }
-                        });
+                        $('.item-row .icon-checkbox').click(
+                            count
+                        )
                     }
                 }else{
                     //如果没有商品,table隐藏,div显示
