@@ -168,9 +168,13 @@
             dataType:'json',
             success:function(res){
                 if(res.code){
-                    alert("商品加入成功,正在跳转至购物车...")
+                    $('.btn-primary').html("加入成功,正在跳转至购物车...")
+                    var timer = setTimeout(() => {
+                        location.href='../pages/cart.html'
+                    }, 2000);
+                }else{
+                    alert('加入商品失败')
                 }
-                location.href='../pages/cart.html'
             },
             error:function(){
                 console.log(2);
