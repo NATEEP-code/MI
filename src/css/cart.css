@@ -207,6 +207,9 @@ a {
     width: 80px;
     text-align: center;
 }
+.cart-container .cart-wrap .cart-goods-list .col-img img{
+    width: 80px;
+}
 .icon-checkbox{
     display: inline-block;
     width: 18px;

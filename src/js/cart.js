@@ -2,10 +2,12 @@
 
     // 一打开购物车页面，展示购物车里面的商品
     showBody();
+    cart()
     function showBody(){
         $.ajax({
             url:'../interface/showlist.php',
             dataType:'json',
+            async:false,
             cache:false,
             success:function(res){
                 console.log(res.code);
@@ -86,11 +88,11 @@
                         }
                         $('.list-head .icon-checkbox').click(function(){
                             sCaseAll = !sCaseAll;
-                            var totalSum = '';
+                            var totalSum = null;
                             var totalNum = '';
                             var totalPrice = null;
                             $('.change-goods-num input').each(function(i,v){
-                                totalSum+=$(v).val()
+                                totalSum+=parseInt($(v).val())
                                 return totalSum;
                             })
                             $('.item-row .col-total').each(function(i,v){
@@ -120,15 +122,45 @@
                                 $('.total-price em').text('0')
                             }
                         })
-                        $('.item-row .icon-checkbox').click(
-                            count
-                        )
+                        
+                        $('.item-row .icon-checkbox').click(count)
                     }
                 }else{
                     //如果没有商品,table隐藏,div显示
                     $('.empty-cart-wrap').removeClass('not-empty');
                     $('.cart-wrap').removeClass('not-empty');                       
                 }
+            }
+        })
+    }
+    function cart(){
+        $.ajax({
+            url:'../json/cart-menu.json',
+            dataType:'json',
+            async:false,
+            cache:false,
+            success:function(res){
+                $.each(res,function(i,v){
+                    $('.recommend-list').append(`
+                    <li class="recommend-item" id="${v.id}">
+                        <a href="../html/mi-detail.html">
+                            <img src="${v.img}" alt="">
+                            <p class="recommend-name">
+                                ${v.title}
+                            </p>
+                            <p class="recommend-price">
+                                ${v.price}
+                            </p>
+                            <p class="recommend-tips">
+                                41.9万人好评
+                            </p>
+                        </a>
+                        <div class="recommend-action">
+                            <a href="javascript:void(0)" class="btn btn-small btn-line-primary">加入购物车</a>
+                        </div>
+                    </li>
+                    `)
+                })
             }
         })
     }
@@ -167,4 +199,29 @@
             })
         }
     })
+    
+    //点击项目添加购物车
+    $('.btn-line-primary').click(function(){
+        console.log(1);
+        var id = $(this).parent().parent().attr('id');
+        var name = $(this).parent().siblings().children('.recommend-name').html().trim()
+        var price = $(this).parent().siblings().children('.recommend-price').html().trim()
+        var img = $(this).parent().siblings().children('img').attr('src').trim()
+        console.log(id,name,price,img);
+        $.ajax({
+            url:'../interface/addwq.php',
+            data:{
+                id:id,
+                name:name,
+                price:price,
+                img:img,
+                num:1
+            },
+            dataType:'json',
+            cache:false,
+            success:function(){
+                location.reload()
+            }
+        })
+    }) 
 })();
