@@ -43,7 +43,7 @@
                                             <a href="javascript:void(0)" class="add iconfont">&#xe721;</a>
                                         </div>
                                     </div>
-                                    <div class="col col-total">${(item.product_price).split('元')[0]*(item.product_num)+'元'}</div>
+                                    <div class="col col-total">${((item.product_price).split('元')[0]*(item.product_num)).toFixed(1)}元</div>
                                     <div class="col col-action">
                                         <a href="javascript:void(0)" class="del iconfont">&#xe62d;</a>
                                     </div>

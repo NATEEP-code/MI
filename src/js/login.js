@@ -61,8 +61,11 @@ function getCookie(key){
                     setCookie("username",uName);
                     setCookie("password",uPass);
                     setCookie('status',1);
-                    alert('登陆成功，正在跳转...');
-                    location.href='./mi-index.html';
+                    $('.login-btn').val('登陆成功，正在跳转...');
+                    var timer = setTimeout(() => {
+                        location.href='./mi-index.html';
+                        clearTimeout(timer);
+                    }, 3000);
                 }else{
                     $('.msg').html("账户名或密码错误");
                 }
